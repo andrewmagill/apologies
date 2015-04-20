@@ -25,8 +25,17 @@ def get_posts(directory="posts", file_types=["md","markdown"]):
                 info["path"] = join(directory, file_name)
 
                 try:
-                    info["created"] = time.ctime(getctime(info["path"]))
-                    info["modified"] = time.ctime(getmtime(info["path"]))
+                    float_create_time = getctime(info["path"])
+                    float_mod_time = getmtime(info["path"])
+
+                    time_create_tuple = time.localtime(float_create_time)
+                    time_mod_tuple = time.localtime(float_mod_time)
+
+                    create_date = "{0}/{1}/{2}".format(time_create_tuple[1],time_create_tuple[2],time_create_tuple[0])
+                    mod_date = "{0}/{1}/{2}".format(time_mod_tuple[1],time_mod_tuple[2],time_mod_tuple[0])
+
+                    info["created"] = create_date
+                    info["modified"] = mod_date
                 except Exception, e:
                     print "Big time error: {0}".format(e)
 
