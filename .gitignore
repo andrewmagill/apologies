@@ -2,7 +2,7 @@
 public/*
 !public/index.html
 !public/README.html
-!public/css
-!public/js
+!public/css/*
+!public/js/*
 posts/*
 !posts/README.md
