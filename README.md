@@ -16,11 +16,11 @@ $ git clone https://github.com/andrewmagill/apologies.git
 ##### commands
 ```
 $ cd apologies
-$ apologize create site_name    # create necessary folder structure
-$ apologize build               # creates static html in site_name/public
+$ apology create site_name    # create necessary folder structure
+$ apology build               # creates static html in site_name/public
                                 # from markdown posts in site_name/posts
                                 # using html templates in site_name/templates
-$ apologize clean               # deletes html from public, rebuilds from posts
+$ apology clean               # deletes html from public, rebuilds from posts
 ```
 
 #### Features
