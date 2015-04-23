@@ -47,6 +47,7 @@ def get_posts(directory="posts", file_types=["md","markdown"]):
                 try:
                     file = open(info["path"])
                     text = file.read()
+                    log_out("reading {0}".format(info["path"]))
                     info["content"] = text
                     file.close()
                 except IOError, err:
@@ -76,6 +77,7 @@ def convert_posts(posts):
         try:
             post["html"] = markdown(post["content"])
             post["link"] = "{0}.html".format(post["short"])
+            log_out("converting {0} to html".format(post["path"]))
         except Exception, e:
             print "Big time error: {0}".format(e)
     return posts
@@ -83,7 +85,14 @@ def convert_posts(posts):
 def parse_template(template, substitutions):
     """returns parsed template given raw template and a dict of substitutions"""
     s = Template(template)
-    return s.substitute(substitutions)
+    html = ""
+
+    try:
+        html = s.substitute(substitutions)
+    except Exception, e:
+        log_out("Error parsing template")
+
+    return html
 
 def generate_index(posts):
     """writes index.html to public directory"""
@@ -101,36 +110,48 @@ def generate_index(posts):
     index_path = join(PUBLIC_DIR,"index.html")
     output_file(index_path, index)
 
+def generate_post_deck(post):
+    # todo: read meta from post, this would be something like
+    # "description:how to plex the blixbak output to the wuju machine"
+    html = str(markdown(post["content"]))
+    text = str(''.join(BeautifulSoup(html).findAll(text=True)))[:180]
+
+    tag_list = post["tags"].split(',')
+    tags_html = ""
+
+    for tag in tag_list:
+        tags_html += "<a href=\"{0}\">{1}</a>".format("/",tag)
+
+    substitutions = {   "TAG_LINK": "/",
+                        "TAGS": tags_html,
+                        "POST_LINK": post["link"],
+                        "HEADLINE": post["title"],
+                        "POST_DATE": post["created"],
+                        "LEAD": text,
+                    }
+
+    log_out("adding {0} to index.html".format(post["short"]))
+    deck_template = get_template("partials/deck")
+
+    deck = ""
+    try:
+        deck = parse_template(deck_template, substitutions)
+    except Exception, e:
+        log_out("error parsing template")
+    return deck
+
 def gen_index_new(posts):
     PUBLIC_DIR = "public"
 
     index_partial = ""
 
     for post in posts:
-
-        html = str(markdown(post["content"]))
-        text = str(''.join(BeautifulSoup(html).findAll(text=True)))[:180]
-
-        tag_list = post["tags"].split(',')
-        tags_html = ""
-
-        for tag in tag_list:
-            tags_html += "<a href=\"{0}\">{1}</a>".format("/",tag)
-
-        substitutions = {   "TAG_LINK": "/",
-                            "TAGS": tags_html,
-                            "POST_LINK": post["link"],
-                            "HEADLINE": post["title"],
-                            "POST_DATE": post["created"],
-                            "LEAD": text,
-                        }
-
-        index_partial_template = get_template("partials/post_index")
-        index_partial = index_partial + parse_template(index_partial_template, substitutions)
+        index_partial = index_partial + generate_post_deck(post)
 
     index_template = get_template("index")
     index = parse_template(index_template, {"POSTS":index_partial})
     index_path = join(PUBLIC_DIR,"index.html")
+    log_out("writing index")
     output_file(index_path, index)
 
 def generate_posts(posts):
@@ -148,6 +169,7 @@ def generate_posts(posts):
 
         page = parse_template(post_template, substitutions)
         path = join(PUBLIC_DIR, post["link"])
+        log_out("writing post: {0}".format(post["title"]))
         output_file(path, page)
 
 def output_file(path, content):
@@ -158,9 +180,13 @@ def output_file(path, content):
     except IOError, err:
         print "Big time error: {0}".format(err)
 
+def log_out(msg):
+    print msg
+
 raw_posts = get_posts()
 converted_posts = convert_posts(raw_posts)
 
 gen_index_new(converted_posts)
 #generate_index(converted_posts)
 generate_posts(converted_posts)
+log_out("done")
