@@ -1,3 +1,61 @@
-h1 {
+html {
+
+}
+
+body {
+  color: #434343;
+  font: 400 16px/120% Arial, sans-serif;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.clearfix:after {
+  content: ".";
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+header {
+  display: block;
+  margin: 0;
+  padding: 12px 0;
+  background: #F5F5F5;
+  border-bottom: 1px solid #e5e5e5;
+  font: normal 14px/100% Arial, sans-serif;
+}
+
+header .brand {
+  display: inline;
+  float: left;
+  margin: 0;
+}
+
+header nav {
+  display: inline;
+  float: right;
+  margin: 0 8px 0 0;
+}
+
+h1, h2, h3 {
+  color: #353535;
+}
+
+h4, h5 {
+  color: #3B3B3B;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+.title {
   color: #da5232;
+  margin-bottom: 2px;
+}
+
+.posted-date {
+
 }

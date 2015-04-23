@@ -1,0 +1,60 @@
+html, body {
+  font-family: arial, sans-serif;
+}
+
+article {
+  padding: 0 0 30px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.tags {
+  padding: 10px 0px 0px 0px;
+  margin: 10px 0px 10px;
+}
+
+.tags a {
+  color: #fff;
+  background: #f27830;
+  padding: 4px 5px 3px 6px;
+  margin: 0 8px 0 0;
+  border-radius: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 1px 1px #C3C3C3;
+  font: 600 12px/100% Arial, sans-serif;
+}
+
+.headline {
+  font: 600 22px/100% Arial, sans-serif;
+  padding: 0px;
+  margin: 20px 0;
+}
+
+.headline a {
+  color: #000;
+  text-decoration: none;
+}
+
+.post-date {
+  color: #999;
+  display: block;
+  margin: 0px 0px 18px;
+  font-size: 12px;
+}
+
+.lead {
+  display: block;
+  color: #493e37;
+  font: normal 16px/140% arial, sans-serif;
+}
+
+.lead h1 h2 h3 h4 h5 {
+  font-size: 16px;
+}
+
+.jump-line {
+  text-decoration: none;
+  font: normal 16px/140% arial, sans-serif;
+  color: #AAA;
+}

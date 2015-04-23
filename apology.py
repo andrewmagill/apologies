@@ -1,4 +1,7 @@
 from markdown import markdown
+# using beau soup for temporary hack
+# todo: read in some meta so you don't have to hack this
+from BeautifulSoup import BeautifulSoup
 from os import listdir
 from os.path import isfile, join, getctime, getmtime
 from string import Template
@@ -23,6 +26,8 @@ def get_posts(directory="posts", file_types=["md","markdown"]):
                 info["title"] = info["short"].replace("_"," ")
                 info["dir"] = directory
                 info["path"] = join(directory, file_name)
+                # todo: parse posts for meta
+                info["tags"] = "programming,python,web"
 
                 try:
                     float_create_time = getctime(info["path"])
@@ -96,6 +101,38 @@ def generate_index(posts):
     index_path = join(PUBLIC_DIR,"index.html")
     output_file(index_path, index)
 
+def gen_index_new(posts):
+    PUBLIC_DIR = "public"
+
+    index_partial = ""
+
+    for post in posts:
+
+        html = str(markdown(post["content"]))
+        text = str(''.join(BeautifulSoup(html).findAll(text=True)))[:180]
+
+        tag_list = post["tags"].split(',')
+        tags_html = ""
+
+        for tag in tag_list:
+            tags_html += "<a href=\"{0}\">{1}</a>".format("/",tag)
+
+        substitutions = {   "TAG_LINK": "/",
+                            "TAGS": tags_html,
+                            "POST_LINK": post["link"],
+                            "HEADLINE": post["title"],
+                            "POST_DATE": post["created"],
+                            "LEAD": text,
+                        }
+
+        index_partial_template = get_template("partials/post_index")
+        index_partial = index_partial + parse_template(index_partial_template, substitutions)
+
+    index_template = get_template("index")
+    index = parse_template(index_template, {"POSTS":index_partial})
+    index_path = join(PUBLIC_DIR,"index.html")
+    output_file(index_path, index)
+
 def generate_posts(posts):
     """writes posts to public directory"""
     PUBLIC_DIR = "public"
@@ -124,5 +161,6 @@ def output_file(path, content):
 raw_posts = get_posts()
 converted_posts = convert_posts(raw_posts)
 
-generate_index(converted_posts)
+gen_index_new(converted_posts)
+#generate_index(converted_posts)
 generate_posts(converted_posts)
