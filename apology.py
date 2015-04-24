@@ -47,7 +47,9 @@ def get_posts(directory="posts", file_types=["md","markdown"]):
                 try:
                     file = open(info["path"])
                     text = file.read()
+
                     log_out("reading {0}".format(info["path"]))
+
                     info["content"] = text
                     file.close()
                 except IOError, err:
@@ -71,12 +73,18 @@ def get_template(name):
         template.close()
         return text
 
+def fix_code_block_hack(html):
+    html = html.replace('<p><code>','<pre><code>')
+    html = html.replace('</code></p>','</code></pre>')
+    return html
+
 def convert_posts(posts):
     """convetrs posts, returns html"""
     for post in posts:
         try:
-            post["html"] = markdown(post["content"])
+            post["html"] = fix_code_block_hack(markdown(post["content"]))
             post["link"] = "{0}.html".format(post["short"])
+
             log_out("converting {0} to html".format(post["path"]))
         except Exception, e:
             print "Big time error: {0}".format(e)
@@ -151,7 +159,9 @@ def gen_index_new(posts):
     index_template = get_template("index")
     index = parse_template(index_template, {"POSTS":index_partial})
     index_path = join(PUBLIC_DIR,"index.html")
+
     log_out("writing index")
+
     output_file(index_path, index)
 
 def generate_posts(posts):
@@ -169,7 +179,9 @@ def generate_posts(posts):
 
         page = parse_template(post_template, substitutions)
         path = join(PUBLIC_DIR, post["link"])
+
         log_out("writing post: {0}".format(post["title"]))
+
         output_file(path, page)
 
 def output_file(path, content):
@@ -189,4 +201,5 @@ converted_posts = convert_posts(raw_posts)
 gen_index_new(converted_posts)
 #generate_index(converted_posts)
 generate_posts(converted_posts)
+
 log_out("done")

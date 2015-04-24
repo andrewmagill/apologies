@@ -10,41 +10,40 @@
     <link href="css/post.css" rel="stylesheet" media="all">
 </head>
 <body>
-    <nav role="navigation">
-      <a href="/">Home</a>
-    </nav>
+  <header role="banner">
+      <nav role="navigation">
+        <a href="/">&#8672;<span>home</span></a>
+      </nav>
+      <h1 class="title">README</h1>
+      <small class="posted-date">Posted <time datetime="4/24/2015">4/24/2015</time></small>
+  </header>
 
-    <header role="banner">
-        <h1 class="title">README</h1>
-        <small class="posted-date">Posted <time datetime="4/20/2015">4/20/2015</time></small>
-    </header>
-
-    <div class="wrap">
-        <main role="main">
-          <h1>Apologies</h1>
+  <div class="wrap">
+      <main role="main">
+        <h1>Apologies</h1>
 <p>Apologies is another gd static site generator, I'm sorry.</p>
 <h4>Dependencies</h4>
 <p><a href="https://github.com/waylan/Python-Markdown">Python Markdown</a> module</p>
 <h5>installing markdown</h5>
-<p><code>$ pip install markdown</code></p>
+<pre><code>$ pip install markdown</code></pre>
 <h4>Installing</h4>
 <h5>'installing' apologies</h5>
-<p><code>$ git clone https://github.com/andrewmagill/apologies.git</code></p>
+<pre><code>$ git clone https://github.com/andrewmagill/apologies.git</code></pre>
 <h4>Using</h4>
 <h5>commands</h5>
-<p><code>$ cd apologies
+<pre><code>$ cd apologies
 $ apology create site_name    # create necessary folder structure
 $ apology build               # creates static html in site_name/public
-                                # from markdown posts in site_name/posts
-                                # using html templates in site_name/templates
-$ apology clean               # deletes html from public, rebuilds from posts</code></p>
+                              # from markdown posts in site_name/posts
+                              # using html templates in site_name/templates
+$ apology clean               # deletes html from public, rebuilds from posts</code></pre>
 <h4>Features</h4>
 <p>Makes html from markdown</p>
-        </main>
-    </div>
+      </main>
+  </div>
 
-    <footer role="contentinfo">
-        <small>Last modified <time datetime="4/20/2015">4/20/2015</time></small>
-    </footer>
+  <footer role="contentinfo">
+      <small>Last modified <time datetime="4/24/2015">4/24/2015</time></small>
+  </footer>
 </body>
 </html>

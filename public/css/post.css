@@ -1,0 +1,18 @@
+header nav {
+  float: left;
+}
+
+header nav a {
+  font-size: 1.6em;
+  color: #666;
+}
+
+header nav a span{
+  font-size: 0.8em;
+}
+
+pre {
+  background: #99D19C;
+  padding: 4px;
+  border-radius: 3px;
+}

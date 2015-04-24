@@ -10,23 +10,22 @@
     <link href="css/post.css" rel="stylesheet" media="all">
 </head>
 <body>
-    <nav role="navigation">
-      <a href="/">Home</a>
-    </nav>
+  <header role="banner">
+      <nav role="navigation">
+        <a href="/">&#8672;<span>home</span></a>
+      </nav>
+      <h1 class="title">$TITLE</h1>
+      <small class="posted-date">Posted <time datetime="$POSTED_DATE">$POSTED_DATE</time></small>
+  </header>
 
-    <header role="banner">
-        <h1 class="title">$TITLE</h1>
-        <small class="posted-date">Posted <time datetime="$POSTED_DATE">$POSTED_DATE</time></small>
-    </header>
+  <div class="wrap">
+      <main role="main">
+        $BODY
+      </main>
+  </div>
 
-    <div class="wrap">
-        <main role="main">
-          $BODY
-        </main>
-    </div>
-
-    <footer role="contentinfo">
-        <small>Last modified <time datetime="$EDIT_DATE">$EDIT_DATE</time></small>
-    </footer>
+  <footer role="contentinfo">
+      <small>Last modified <time datetime="$EDIT_DATE">$EDIT_DATE</time></small>
+  </footer>
 </body>
 </html>

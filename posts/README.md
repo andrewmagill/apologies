@@ -18,8 +18,8 @@ $ git clone https://github.com/andrewmagill/apologies.git
 $ cd apologies
 $ apology create site_name    # create necessary folder structure
 $ apology build               # creates static html in site_name/public
-                                # from markdown posts in site_name/posts
-                                # using html templates in site_name/templates
+                              # from markdown posts in site_name/posts
+                              # using html templates in site_name/templates
 $ apology clean               # deletes html from public, rebuilds from posts
 ```
 

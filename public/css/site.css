@@ -39,21 +39,22 @@ header nav {
 }
 
 h1, h2, h3 {
-  color: #353535;
+  color: #666;
 }
 
 h4, h5 {
-  color: #3B3B3B;
+  color: #777;
 }
 
 a {
-  color: #333;
+  color: #888;
   text-decoration: none;
 }
 
 .title {
-  color: #da5232;
+  color: #f27830;
   margin-bottom: 2px;
+  text-shadow: 0 1px 1px #C3C3C3;
 }
 
 .posted-date {
