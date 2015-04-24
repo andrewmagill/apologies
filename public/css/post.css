@@ -7,6 +7,11 @@ header nav a {
   color: #666;
 }
 
+header a:hover {
+  box-shadow: 0 0 0 transparent;
+  color: #333;
+}
+
 header nav a span{
   font-size: 0.8em;
 }
@@ -15,4 +20,11 @@ pre {
   background: #99D19C;
   padding: 4px;
   border-radius: 3px;
+}
+
+blockquote {
+  margin-left: 0;
+  padding: 1px 0;
+  padding-left: 40px;
+  border-left: 4px solid #DDD;
 }
